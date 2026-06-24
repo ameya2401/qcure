@@ -27,13 +27,10 @@ export function AppShell() {
               Q-Cure
             </p>
             <h1 className="font-display text-2xl font-semibold tracking-tight">
-              Real-time queue orchestration for neighbourhood clinics
+              A smart, real-time waitlist and patient triage system designed to eliminate waiting room chaos in modern healthcare clinics.
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <span className="rounded-full bg-secondary px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-secondary-foreground">
-              {queueService.isDemoMode() ? "Demo mode" : "Supabase live"}
-            </span>
             <nav className="flex flex-wrap gap-2">
               {links.map((link) => {
                 const Icon = link.icon;

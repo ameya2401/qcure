@@ -1,8 +1,8 @@
 # Q-Cure
 
-Real-time digital queue management for neighbourhood clinics.
+A smart, real-time waitlist and patient triage system designed to eliminate waiting room chaos in modern healthcare clinics.
 
-Q-Cure replaces paper tokens with a fast receptionist workflow, an instantly updating waiting-room display, and a doctor-facing live operations cockpit. The project is built for hackathon judging: it demonstrates real-time queue orchestration, actual wait-time estimation from consultation history, and a polished SaaS-style product experience.
+Q-Cure replaces paper tokens with a fast receptionist workflow, a patient self-service kiosk, an instantly updating waiting-room display, and a doctor-facing live operations cockpit. The project is built for hackathon judging: it demonstrates real-time queue orchestration, actual wait-time estimation from consultation history, advanced emergency patient triage, and a polished SaaS-style product experience.
 
 ## Problem Statement
 
@@ -12,31 +12,37 @@ Most neighbourhood clinics still rely on verbal updates and paper tokens. That c
 - Receptionists manually maintain the queue.
 - Doctors lack a live view of the clinic flow.
 - Wait-time expectations are inconsistent and often guessed.
+- Emergency cases disrupt the entire manual queue.
 
 Q-Cure digitizes the full loop with Supabase-backed queue operations, realtime subscriptions, and a frontend that stays synchronized without refreshes or polling.
 
-## What the Demo Shows
+## Core Features & What the Demo Shows
 
-- Reception can register a patient in a single action and generate sequential tokens like `T001`, `T002`, `T003`.
-- The waiting-room screen updates instantly when patients are added, called, or completed.
-- Estimated wait times use real completed consultation durations when history exists, and fall back to a configurable clinic default when it does not.
-- Critical queue operations are modeled as RPC functions instead of raw client-side mutations.
+- **Reception Dashboard**: Register a patient in a single action and generate sequential tokens like `T001`, `T002`, `T003`.
+- **Patient Self-Check-in Kiosk**: A dedicated `/kiosk` page optimized for tablets where patients can register themselves.
+- **Kiosk QR Code Generator**: Receptionists can instantly display a QR code for patients to scan and join the queue from their smartphones.
+- **Emergency / Priority Triage**: Mark urgent patients as "Priority" to automatically bypass the standard queue and jump to the front of the line. Priority patients are visually highlighted across all dashboards with a red badge.
+- **Waiting Room Display**: An instantly updating screen optimized for TVs that displays the currently serving token, live wait times, and the upcoming queue.
+- **Doctor Cockpit**: A focused operational view for doctors to see who is next, mark consultations as complete, and track overall queue health and clinic efficiency.
+- **Smart Wait Time Estimation**: Calculates estimated wait times using real completed consultation durations when history exists, falling back to a configurable clinic default when it does not.
+- **RPC Modeled Operations**: Critical queue operations (like advancing the queue and recalculating times) are securely modeled as Postgres RPC functions instead of raw client-side mutations.
 
 ## Tech Stack
 
-- Frontend: React, Vite, TypeScript, TailwindCSS, React Query, React Router
-- UI primitives: shadcn/ui-style component patterns with Radix Slot/Dialog
-- Backend: Supabase
-- Database: PostgreSQL
-- Realtime: Supabase Realtime with Postgres change events
-- Testing: Vitest, Testing Library
-- Deployment: Vercel for frontend, Supabase Cloud for backend
+- **Frontend**: React, Vite, TypeScript, TailwindCSS, React Query, React Router
+- **UI Primitives**: Custom components built with Radix UI and shadcn/ui principles
+- **Backend**: Supabase
+- **Database**: PostgreSQL
+- **Realtime**: Supabase Realtime with Postgres change events
+- **Testing**: Vitest, Testing Library
+- **Deployment**: Vercel for frontend, Supabase Cloud for backend
 
 ## Routes
 
 - `/reception`: receptionist dashboard for registration, queue control, analytics, and settings
 - `/waiting-room`: patient-facing realtime screen optimized for phone or TV display
 - `/doctor`: live doctor cockpit with consultation and queue visibility
+- `/kiosk`: a streamlined, full-screen patient self-registration portal
 
 ## Architecture
 
@@ -67,6 +73,7 @@ flowchart LR
 
 - `supabase/migrations/001_init.sql`: tables, indexes, triggers, RLS, policies
 - `supabase/migrations/002_rpc_functions.sql`: queue RPC functions and wait-time calculation
+- `supabase/migrations/003_add_priority.sql`: priority and emergency queue overrides
 - `supabase/seed.sql`: sample data for quick validation
 
 ## Folder Structure
@@ -140,9 +147,10 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 1. Create a new Supabase project.
 2. Run `supabase/migrations/001_init.sql`.
 3. Run `supabase/migrations/002_rpc_functions.sql`.
-4. Optionally run `supabase/seed.sql`.
-5. Enable Realtime for `patients`, `clinic_settings`, and `queue_events`.
-6. Add the project URL and anon key to `.env`.
+4. Run `supabase/migrations/003_add_priority.sql`.
+5. Optionally run `supabase/seed.sql`.
+6. Enable Realtime for `patients`, `clinic_settings`, and `queue_events`.
+7. Add the project URL and anon key to `.env`.
 
 ## Security
 
@@ -196,15 +204,16 @@ Suggested screenshots for a submission:
 - Add-patient flow showing instant token assignment
 - Waiting-room display showing live current token
 - Doctor dashboard showing current patient and queue status
+- Self-check-in kiosk display with QR generator
 
 ## Future Scope
 
 - WhatsApp or SMS queue notifications
-- multilingual patient views
-- doctor-specific consultation notes integration
-- appointment pre-booking and no-show handling
-- branch-level multi-clinic support
-- richer RBAC with Supabase Auth
+- Multi-lingual patient kiosk views
+- Doctor-specific consultation notes integration
+- Appointment pre-booking and no-show handling
+- Branch-level multi-clinic support
+- Richer RBAC with Supabase Auth
 
 ## Documentation Map
 
