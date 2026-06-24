@@ -30,4 +30,11 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/kiosk",
+    lazy: async () => {
+      const { KioskPage } = await import("@/pages/KioskPage");
+      return { Component: KioskPage };
+    },
+  },
 ]);

@@ -10,6 +10,20 @@ import type {
 
 const CLINIC_HOURS = 10;
 
+export function sortPatients(left: Patient, right: Patient) {
+  const statusOrder = { COMPLETED: 0, ACTIVE: 1, WAITING: 2 };
+  if (statusOrder[left.status] !== statusOrder[right.status]) {
+    return statusOrder[left.status] - statusOrder[right.status];
+  }
+  
+  if (left.status === "WAITING") {
+    if (left.isPriority && !right.isPriority) return -1;
+    if (!left.isPriority && right.isPriority) return 1;
+  }
+  
+  return left.token.localeCompare(right.token);
+}
+
 export function deriveAverageConsultationDuration(
   patients: Patient[],
   settings: ClinicSettings,
@@ -51,13 +65,13 @@ export function mapQueueRows(
 
   const waiting = patients
     .filter((patient) => patient.status === "WAITING")
-    .sort((left, right) => left.token.localeCompare(right.token));
+    .sort(sortPatients);
 
   const activeCount = activeToken ? 1 : 0;
 
   const rows = patients
     .slice()
-    .sort((left, right) => left.token.localeCompare(right.token))
+    .sort(sortPatients)
     .map((patient) => {
       if (patient.status === "COMPLETED") {
         return { ...patient, position: null, estimatedWait: 0 };
@@ -150,7 +164,7 @@ export function buildSnapshot(
     settings,
     patients: patients
       .slice()
-      .sort((left, right) => left.token.localeCompare(right.token)),
+      .sort(sortPatients),
     queueRows: rows,
     queueEvents: queueEvents
       .slice()

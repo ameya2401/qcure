@@ -20,6 +20,7 @@ function mapPatient(row: Record<string, unknown>): Patient {
     consultationStartedAt: (row.consultation_started_at as string | null) ?? null,
     consultationEndedAt: (row.consultation_ended_at as string | null) ?? null,
     consultationDuration: (row.consultation_duration as number | null) ?? null,
+    isPriority: Boolean(row.is_priority),
     createdAt: String(row.created_at),
     updatedAt: String(row.updated_at),
   };
@@ -86,7 +87,10 @@ export const supabaseQueueRepository: QueueRepository = {
     return loadSnapshot();
   },
   async addPatient(input: AddPatientInput) {
-    return callProcedure("add_patient", { patient_name: input.name.trim() });
+    return callProcedure("add_patient", { 
+      patient_name: input.name.trim(),
+      is_priority: input.isPriority ?? false
+    });
   },
   async callNextPatient() {
     return callProcedure("call_next_patient", {});

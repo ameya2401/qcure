@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useQueueSnapshot } from "@/hooks/useQueueSnapshot";
 import { useRealtimeQueue } from "@/hooks/useRealtimeQueue";
 import { formatMinutes } from "@/utils/format";
+import { Badge } from "@/components/ui/badge";
 
 export function DoctorPage() {
   useRealtimeQueue();
@@ -67,9 +68,14 @@ export function DoctorPage() {
                   Current patient
                 </p>
               </div>
-              <p className="mt-4 font-display text-4xl font-semibold">
-                {metrics.activePatient?.name ?? "No consultation active"}
-              </p>
+              <div className="mt-4 flex items-center justify-between">
+                <p className="font-display text-4xl font-semibold">
+                  {metrics.activePatient?.name ?? "No consultation active"}
+                </p>
+                {metrics.activePatient?.isPriority && (
+                  <Badge tone="danger">Priority</Badge>
+                )}
+              </div>
               <p className="mt-2 text-sm text-muted-foreground">
                 {metrics.activePatient?.token ?? "Queue will surface here when the next patient is called."}
               </p>
