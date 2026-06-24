@@ -2,7 +2,7 @@ create or replace function public.calculate_wait_times()
 returns table (
   token text,
   status text,
-  position integer,
+  "position" integer,
   estimated_wait integer
 )
 language sql
@@ -36,7 +36,7 @@ select
     when p.status = 'ACTIVE' then 1
     when p.status = 'WAITING' then ow.waiting_order + case when exists (select 1 from active) then 1 else 0 end
     else null
-  end as position,
+  end as "position",
   case
     when p.status = 'WAITING'
       then ((ow.waiting_order - 1) + case when exists (select 1 from active) then 1 else 0 end) * (select avg_duration from completed)
