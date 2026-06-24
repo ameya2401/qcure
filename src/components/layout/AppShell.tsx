@@ -19,16 +19,19 @@ export function AppShell() {
 
   return (
     <div className="relative flex min-h-screen flex-col">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(20,184,166,0.16),transparent_20%),radial-gradient(circle_at_80%_10%,rgba(14,165,233,0.2),transparent_20%),radial-gradient(circle_at_50%_100%,rgba(125,211,252,0.12),transparent_25%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(11,87,208,0.08),transparent_20%),radial-gradient(circle_at_80%_10%,rgba(196,219,255,0.25),transparent_20%),radial-gradient(circle_at_50%_100%,rgba(59,130,246,0.08),transparent_25%)]" />
       <div className="relative mx-auto flex min-h-screen w-full max-w-[1600px] flex-col px-4 pb-6 pt-4 md:px-6">
         <header className="sticky top-4 z-20 mb-6 flex flex-col gap-4 rounded-[28px] border border-white/70 bg-white/80 p-4 shadow-panel backdrop-blur dark:border-white/10 dark:bg-slate-950/70 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.35em] text-primary">
-              Q-Cure
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="Q-Cure Logo" className="h-10 w-10" />
+              <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">
+                Q-Cure
+              </h1>
+            </div>
+            <p className="font-body text-sm font-medium text-muted-foreground sm:text-base">
+              Zero-Wait Digital Triage & Real-Time Queue Orchestration.
             </p>
-            <h1 className="font-display text-2xl font-semibold tracking-tight">
-              A smart, real-time waitlist and patient triage system designed to eliminate waiting room chaos in modern healthcare clinics.
-            </h1>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <nav className="flex flex-wrap gap-2">

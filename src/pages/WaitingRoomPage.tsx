@@ -18,10 +18,10 @@ export function WaitingRoomPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[36px] border border-white/70 bg-[linear-gradient(135deg,rgba(8,145,178,0.94),rgba(15,23,42,0.92))] p-6 text-white shadow-panel sm:p-8 lg:p-10">
+      <section className="rounded-[36px] border border-white/70 bg-[linear-gradient(135deg,rgba(11,87,208,0.94),rgba(15,23,42,0.92))] p-6 text-white shadow-panel sm:p-8 lg:p-10">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.35em] text-cyan-100/80">
+            <p className="font-mono text-xs uppercase tracking-[0.35em] text-blue-100/80">
               Waiting Room Display
             </p>
             <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-6xl">
@@ -38,20 +38,20 @@ export function WaitingRoomPage() {
             <p className="font-display text-7xl font-semibold leading-none sm:text-9xl">
               {metrics.currentToken ?? "----"}
             </p>
-            <p className="mt-4 max-w-xl text-lg text-cyan-50/80">
+            <p className="mt-4 max-w-xl text-lg text-blue-50/80">
               Patients see changes instantly as the receptionist advances the queue.
             </p>
           </div>
           <div className="grid w-full gap-4 sm:grid-cols-3 lg:max-w-2xl">
             <Card className="border-white/10 bg-white/10 text-white">
               <CardContent className="p-5">
-                <p className="text-sm uppercase tracking-[0.18em] text-cyan-100/70">Ahead of you</p>
+                <p className="text-sm uppercase tracking-[0.18em] text-blue-100/70">Ahead of you</p>
                 <p className="mt-3 text-4xl font-semibold">{metrics.waitingPatients}</p>
               </CardContent>
             </Card>
             <Card className="border-white/10 bg-white/10 text-white">
               <CardContent className="p-5">
-                <p className="text-sm uppercase tracking-[0.18em] text-cyan-100/70">Estimated wait</p>
+                <p className="text-sm uppercase tracking-[0.18em] text-blue-100/70">Estimated wait</p>
                 <p className="mt-3 text-4xl font-semibold">
                   {formatMinutes(metrics.estimatedQueueTime)}
                 </p>
@@ -59,7 +59,7 @@ export function WaitingRoomPage() {
             </Card>
             <Card className="border-white/10 bg-white/10 text-white">
               <CardContent className="p-5">
-                <p className="text-sm uppercase tracking-[0.18em] text-cyan-100/70">Waiting total</p>
+                <p className="text-sm uppercase tracking-[0.18em] text-blue-100/70">Waiting total</p>
                 <p className="mt-3 text-4xl font-semibold">{metrics.totalWaitingPatients}</p>
               </CardContent>
             </Card>
