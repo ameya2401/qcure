@@ -1,0 +1,74 @@
+import { Activity, MoonStar, Stethoscope, SunMedium, TimerReset } from "lucide-react";
+import { NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { cn } from "@/utils/cn";
+import { queueService } from "@/services/queue/queueService";
+
+const links = [
+  { to: "/reception", label: "Reception", icon: Activity },
+  { to: "/waiting-room", label: "Waiting Room", icon: TimerReset },
+  { to: "/doctor", label: "Doctor", icon: Stethoscope },
+];
+
+export function AppShell() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
+  return (
+    <div className="relative flex min-h-screen flex-col">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(20,184,166,0.16),transparent_20%),radial-gradient(circle_at_80%_10%,rgba(14,165,233,0.2),transparent_20%),radial-gradient(circle_at_50%_100%,rgba(125,211,252,0.12),transparent_25%)]" />
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[1600px] flex-col px-4 pb-6 pt-4 md:px-6">
+        <header className="sticky top-4 z-20 mb-6 flex flex-col gap-4 rounded-[28px] border border-white/70 bg-white/80 p-4 shadow-panel backdrop-blur dark:border-white/10 dark:bg-slate-950/70 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.35em] text-primary">
+              Q-Cure
+            </p>
+            <h1 className="font-display text-2xl font-semibold tracking-tight">
+              Real-time queue orchestration for neighbourhood clinics
+            </h1>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-secondary px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-secondary-foreground">
+              {queueService.isDemoMode() ? "Demo mode" : "Supabase live"}
+            </span>
+            <nav className="flex flex-wrap gap-2">
+              {links.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    className={({ isActive }) =>
+                      cn(
+                        "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition",
+                        isActive
+                          ? "bg-primary text-primary-foreground shadow-panel"
+                          : "bg-muted/80 text-muted-foreground hover:bg-muted hover:text-foreground",
+                      )
+                    }
+                  >
+                    <Icon className="h-4 w-4" />
+                    {link.label}
+                  </NavLink>
+                );
+              })}
+            </nav>
+            <button
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:bg-muted"
+              onClick={() => setIsDark((value) => !value)}
+              type="button"
+            >
+              {isDark ? <SunMedium className="h-4 w-4" /> : <MoonStar className="h-4 w-4" />}
+            </button>
+          </div>
+        </header>
+        <main className="flex-1">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 205 50% 98%;
+  --foreground: 215 35% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 35% 14%;
+  --primary: 196 82% 37%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 178 56% 94%;
+  --secondary-foreground: 186 57% 20%;
+  --muted: 210 28% 94%;
+  --muted-foreground: 215 16% 42%;
+  --accent: 169 76% 88%;
+  --accent-foreground: 181 67% 17%;
+  --destructive: 5 84% 56%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 204 25% 86%;
+  --input: 204 25% 86%;
+  --ring: 196 82% 37%;
+}
+
+.dark {
+  --background: 214 42% 10%;
+  --foreground: 210 40% 98%;
+  --card: 214 40% 14%;
+  --card-foreground: 210 40% 98%;
+  --primary: 187 87% 55%;
+  --primary-foreground: 214 42% 10%;
+  --secondary: 198 28% 20%;
+  --secondary-foreground: 193 89% 91%;
+  --muted: 216 22% 18%;
+  --muted-foreground: 214 20% 74%;
+  --accent: 176 49% 22%;
+  --accent-foreground: 171 76% 82%;
+  --destructive: 5 80% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214 22% 22%;
+  --input: 214 22% 22%;
+  --ring: 187 87% 55%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply min-h-screen bg-background bg-haze font-body text-foreground antialiased;
+}
+
+#root {
+  @apply min-h-screen;
+}
+
+* {
+  @apply border-border;
+}
+
+::selection {
+  background: rgba(13, 148, 136, 0.22);
+}

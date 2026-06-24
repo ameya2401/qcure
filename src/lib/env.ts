@@ -1,0 +1,9 @@
+export const env = {
+  supabaseUrl: import.meta.env.VITE_SUPABASE_URL ?? "",
+  supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? "",
+  appName: "QueueCure",
+};
+
+export function hasSupabaseConfig() {
+  return Boolean(env.supabaseUrl && env.supabaseAnonKey);
+}
