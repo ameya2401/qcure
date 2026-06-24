@@ -37,7 +37,8 @@ BEGIN
     
     UPDATE public.clinic_settings
     SET current_token = new_token,
-        updated_at = timezone('utc', now());
+        updated_at = timezone('utc', now())
+    WHERE id IS NOT NULL;
   END IF;
 
   -- Insert the new patient WITH the is_priority flag
@@ -99,7 +100,8 @@ BEGIN
 
     UPDATE public.clinic_settings
     SET current_token = next_patient.token,
-        updated_at = timezone('utc', now());
+        updated_at = timezone('utc', now())
+    WHERE id IS NOT NULL;
 
     INSERT INTO public.queue_events (event_type, token, metadata)
     VALUES ('PATIENT_CALLED', next_patient.token, '{}'::jsonb);
@@ -107,7 +109,8 @@ BEGIN
     -- No one left in the queue
     UPDATE public.clinic_settings
     SET current_token = null,
-        updated_at = timezone('utc', now());
+        updated_at = timezone('utc', now())
+    WHERE id IS NOT NULL;
   END IF;
 END;
 $$;
