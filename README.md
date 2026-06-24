@@ -1,6 +1,6 @@
 # Q-Cure
 
-A smart, real-time waitlist and patient triage system designed to eliminate waiting room chaos in modern healthcare clinics.
+Zero-Wait Digital Triage & Real-Time Queue Orchestration.
 
 Q-Cure replaces paper tokens with a fast receptionist workflow, a patient self-service kiosk, an instantly updating waiting-room display, and a doctor-facing live operations cockpit. The project is built for hackathon judging: it demonstrates real-time queue orchestration, actual wait-time estimation from consultation history, advanced emergency patient triage, and a polished SaaS-style product experience.
 
@@ -43,6 +43,8 @@ Q-Cure digitizes the full loop with Supabase-backed queue operations, realtime s
 - `/waiting-room`: patient-facing realtime screen optimized for phone or TV display
 - `/doctor`: live doctor cockpit with consultation and queue visibility
 - `/kiosk`: a streamlined, full-screen patient self-registration portal
+
+*Note: The project includes a `vercel.json` configuration file with a rewrite rule to ensure client-side SPA routing works correctly on Vercel without returning 404 errors.*
 
 ## Architecture
 

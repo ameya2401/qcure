@@ -46,7 +46,7 @@ export default {
       },
       backgroundImage: {
         haze:
-          "radial-gradient(circle at top left, rgba(45, 212, 191, 0.22), transparent 32%), radial-gradient(circle at top right, rgba(14, 165, 233, 0.18), transparent 26%), linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(239, 246, 255, 0.98))",
+          "radial-gradient(circle at top left, rgba(11, 87, 208, 0.12), transparent 32%), radial-gradient(circle at top right, rgba(196, 219, 255, 0.4), transparent 26%), linear-gradient(180deg, rgba(250, 252, 255, 0.95), rgba(240, 246, 255, 0.98))",
       },
     },
   },
