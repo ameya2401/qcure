@@ -9,6 +9,7 @@ export interface Patient {
   consultationStartedAt: string | null;
   consultationEndedAt: string | null;
   consultationDuration: number | null;
+  isPriority?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -72,6 +73,7 @@ export interface QueueSnapshot {
 
 export interface AddPatientInput {
   name: string;
+  isPriority?: boolean;
 }
 
 export interface UpdateClinicSettingsInput {

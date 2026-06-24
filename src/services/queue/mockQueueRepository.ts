@@ -1,4 +1,4 @@
-import { buildSnapshot, getConsultationDuration } from "@/utils/queue";
+import { buildSnapshot, getConsultationDuration, sortPatients } from "@/utils/queue";
 import { demoEvents, demoPatients, demoSettings } from "@/lib/mock-data";
 import type {
   AddPatientInput,
@@ -71,6 +71,7 @@ export const mockQueueRepository: QueueRepository = {
       consultationStartedAt: activeExists ? null : new Date().toISOString(),
       consultationEndedAt: null,
       consultationDuration: null,
+      isPriority: input.isPriority,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -90,7 +91,7 @@ export const mockQueueRepository: QueueRepository = {
     const activePatient = demoState.patients.find((patient) => patient.status === "ACTIVE");
     const nextWaiting = demoState.patients
       .filter((patient) => patient.status === "WAITING")
-      .sort((left, right) => left.token.localeCompare(right.token))[0];
+      .sort(sortPatients)[0];
     const now = new Date().toISOString();
 
     demoState.patients = demoState.patients.map((patient) => {

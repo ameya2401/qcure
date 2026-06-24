@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { QueueStatusPill } from "@/components/dashboard/QueueStatusPill";
 import { formatMinutes } from "@/utils/format";
+import { Badge } from "@/components/ui/badge";
 import type { QueueRow } from "@/types/queue";
 
 export function QueueTable({ rows }: { rows: QueueRow[] }) {
@@ -26,7 +27,14 @@ export function QueueTable({ rows }: { rows: QueueRow[] }) {
             {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell className="font-mono font-semibold">{row.token}</TableCell>
-                <TableCell className="font-medium">{row.name}</TableCell>
+                <TableCell className="font-medium">
+                  <div className="flex items-center gap-2">
+                    {row.name}
+                    {row.isPriority && (
+                      <Badge tone="danger">Priority</Badge>
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell>
                   <QueueStatusPill status={row.status} />
                 </TableCell>

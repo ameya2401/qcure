@@ -5,6 +5,7 @@ import { QueueTable } from "@/components/dashboard/QueueTable";
 import { ClinicSettingsPanel } from "@/components/dashboard/ClinicSettingsPanel";
 import { QueueTimeline } from "@/components/dashboard/QueueTimeline";
 import { AnalyticsChart } from "@/components/dashboard/AnalyticsChart";
+import { KioskQrDialog } from "@/components/dashboard/KioskQrDialog";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -141,6 +142,9 @@ export function ReceptionPage() {
                   </p>
                   <p className="text-sm text-muted-foreground">Reception efficiency score</p>
                 </div>
+              </div>
+              <div className="pt-2">
+                <KioskQrDialog />
               </div>
             </CardContent>
           </Card>

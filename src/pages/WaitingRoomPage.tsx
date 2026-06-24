@@ -110,7 +110,12 @@ export function WaitingRoomPage() {
                     <p className="font-mono text-sm uppercase tracking-[0.18em] text-primary">
                       {patient.token}
                     </p>
-                    <p className="mt-2 text-xl font-semibold">{patient.name}</p>
+                    <div className="mt-2 flex items-center justify-between">
+                      <p className="text-xl font-semibold">{patient.name}</p>
+                      {patient.isPriority && (
+                        <Badge tone="danger">Priority</Badge>
+                      )}
+                    </div>
                     <p className="mt-2 text-sm text-muted-foreground">
                       Wait {formatMinutes(patient.estimatedWait)}
                     </p>

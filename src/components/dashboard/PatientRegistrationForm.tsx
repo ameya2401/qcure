@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Patient name must be at least 2 characters"),
+  isPriority: z.boolean().default(false).optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -23,6 +24,7 @@ export function PatientRegistrationForm({
     resolver: zodResolver(schema),
     defaultValues: {
       name: "",
+      isPriority: false,
     },
   });
 
@@ -40,11 +42,19 @@ export function PatientRegistrationForm({
             form.reset();
           })}
         >
-          <div className="flex-1">
+          <div className="flex-1 space-y-2">
             <Input placeholder="Patient name" {...form.register("name")} />
             {form.formState.errors.name ? (
-              <p className="mt-2 text-sm text-destructive">{form.formState.errors.name.message}</p>
+              <p className="mt-1 text-sm text-destructive">{form.formState.errors.name.message}</p>
             ) : null}
+            <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground mt-2 cursor-pointer">
+              <input
+                type="checkbox"
+                className="rounded border-input text-primary focus:ring-primary h-4 w-4"
+                {...form.register("isPriority")}
+              />
+              Emergency / Priority
+            </label>
           </div>
           <Button className="sm:min-w-44" disabled={isPending} type="submit">
             <UserPlus className="h-4 w-4" />
